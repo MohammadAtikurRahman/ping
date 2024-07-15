@@ -145,34 +145,35 @@ const App = () => {
         )}
       </Form>
       {selectedPhoneNumber === "" ? (
-        <Table striped bordered hover className="table-responsive">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Beneficiary Mobile</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredUniquePhoneNumbers
-              .slice(indexOfFirstTransaction, indexOfLastTransaction)
-              .map((phoneNumber, index) => (
-                <tr key={phoneNumber}>
-                  <td>{index + 1 + indexOfFirstTransaction}</td>
-                  <td>
-                    <Button
-                      variant="link"
-                      onClick={() => handlePhoneNumberClick(phoneNumber)}
-                    >
-                      {phoneNumber}
-                    </Button>
-                  </td>
-                  <td>Click to see details</td>
-                </tr>
-              ))}
-          </tbody>
-        </Table>
-      ) : (
+  <Table striped bordered hover className="table-responsive">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Beneficiary Mobile</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      {filteredUniquePhoneNumbers
+        .filter(phoneNumber => phoneNumber !== "NA")
+        .slice(indexOfFirstTransaction, indexOfLastTransaction)
+        .map((phoneNumber, index) => (
+          <tr key={phoneNumber}>
+            <td>{index + 1 + indexOfFirstTransaction}</td>
+            <td>
+              <Button
+                variant="link"
+                onClick={() => handlePhoneNumberClick(phoneNumber)}
+              >
+                {phoneNumber}
+              </Button>
+            </td>
+            <td>Click to see details</td>
+          </tr>
+        ))}
+    </tbody>
+  </Table>
+) : (
         currentTransactions.length > 0 && (
           <>
             <Table striped bordered hover className="table-responsive">
