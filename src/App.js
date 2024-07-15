@@ -136,11 +136,11 @@ const App = () => {
         <hr />
         {selectedPhoneNumber && (
           <Button
-            variant="secondary"
+            variant="danger"
             className="ml-2 w-100"
             onClick={() => setSelectedPhoneNumber("")}
           >
-            Show All Transactions
+            Home
           </Button>
         )}
       </Form>
