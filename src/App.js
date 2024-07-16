@@ -192,6 +192,7 @@ const App = () => {
                   <th>#</th>
                   <th>Beneficiary ID</th>
                   <th>Beneficiary Mobile</th>
+                  <th>Amount</th>
                   <th>Timestamp</th>
                   <th>Last Sync</th>
                 </tr>
@@ -202,6 +203,8 @@ const App = () => {
                     <td>{index + 1 + indexOfFirstTransaction}</td>
                     <td>{transaction.beneficiaryId}</td>
                     <td>{transaction.beneficiaryMobile}</td>
+                    <td>{transaction.amount}</td>
+
                     <td>{new Date(transaction.timestamp).toLocaleString()}</td>
                     <td>{calculateMinutesAgo(transaction.timestamp)}</td>
                   </tr>
