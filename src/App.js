@@ -159,28 +159,35 @@ const App = () => {
           <thead>
             <tr>
               <th>#</th>
+              <th>Beneficiary ID</th>
               <th>Beneficiary Mobile</th>
               <th>Details</th>
             </tr>
           </thead>
           <tbody>
             {filteredUniquePhoneNumbers
-              .filter(phoneNumber => phoneNumber !== "NA")
+              .filter((phoneNumber) => phoneNumber !== "NA")
               .slice(indexOfFirstTransaction, indexOfLastTransaction)
-              .map((phoneNumber, index) => (
-                <tr key={phoneNumber}>
-                  <td>{index + 1 + indexOfFirstTransaction}</td>
-                  <td>
-                    <Button
-                      variant="link"
-                      onClick={() => handlePhoneNumberClick(phoneNumber)}
-                    >
-                      {phoneNumber}
-                    </Button>
-                  </td>
-                  <td>Click to see details</td>
-                </tr>
-              ))}
+              .map((phoneNumber, index) => {
+                const transaction = transactions.find(
+                  (t) => t.beneficiaryMobile === phoneNumber
+                );
+                return (
+                  <tr key={phoneNumber}>
+                    <td>{index + 1 + indexOfFirstTransaction}</td>
+                    <td>{transaction ? transaction.beneficiaryId : "N/A"}</td>
+                    <td>
+                      <Button
+                        variant="link"
+                        onClick={() => handlePhoneNumberClick(phoneNumber)}
+                      >
+                        {phoneNumber}
+                      </Button>
+                    </td>
+                    <td>Click to see details</td>
+                  </tr>
+                );
+              })}
           </tbody>
         </Table>
       ) : (
@@ -193,6 +200,7 @@ const App = () => {
                   <th>Beneficiary ID</th>
                   <th>Beneficiary Mobile</th>
                   <th>Amount</th>
+
                   <th>Timestamp</th>
                   <th>Last Sync</th>
                 </tr>
@@ -204,7 +212,6 @@ const App = () => {
                     <td>{transaction.beneficiaryId}</td>
                     <td>{transaction.beneficiaryMobile}</td>
                     <td>{transaction.amount}</td>
-
                     <td>{new Date(transaction.timestamp).toLocaleString()}</td>
                     <td>{calculateMinutesAgo(transaction.timestamp)}</td>
                   </tr>
